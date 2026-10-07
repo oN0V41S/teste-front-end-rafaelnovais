@@ -1,0 +1,81 @@
+@use 'variables' as *;
+
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-block-size: 390px;
+  overflow: hidden;
+  background-color: $color-text;
+  color: $color-white;
+
+  // Darkens the left side so the text stays readable over the photo.
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, $color-overlay-hero 0%, transparent 67%);
+  }
+}
+
+.background {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  object-position: left center;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  inline-size: 100%;
+  max-inline-size: $container-width;
+  margin-inline: auto;
+  padding: 48px 16px;
+}
+
+.title {
+  max-inline-size: 822px;
+  font-size: 48px;
+  font-weight: $font-weight-semibold;
+  line-height: 50px;
+
+  @media (max-width: 720px) {
+    font-size: 32px;
+    line-height: 36px;
+  }
+}
+
+.offer {
+  margin-block-start: 8px;
+  font-size: 32px;
+  font-weight: $font-weight-light;
+
+  strong {
+    color: $color-yellow;
+    font-weight: $font-weight-bold;
+  }
+
+  @media (max-width: 720px) {
+    font-size: 24px;
+  }
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: 206px;
+  block-size: 50px;
+  margin-block-start: 32px;
+  padding: 7px 49px;
+  border: 0;
+  border-radius: 5px;
+  background-color: $color-yellow;
+  color: $color-violet;
+  font-size: 16px;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+}
