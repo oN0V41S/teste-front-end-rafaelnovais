@@ -15,6 +15,7 @@ $color-text-soft: #4a4a4a;
 $font-family: 'Poppins', sans-serif;
 $font-weight-light: 300;
 $font-weight-medium: 500;
+$font-weight-semibold: 600;
 $font-weight-bold: 700;
 
 // Layout
@@ -29,3 +30,9 @@ $color-overlay: rgba(0, 0, 0, 0.54);
 $color-border: #bdbdbd;
 $color-divider: #e0e0e0;
 $color-text-tab: #3b3b3b;
+
+// Header
+$color-highlight: #3019b2;
+$color-search: #f6f5f2;
+$color-line: #f0f0f0;
+$shadow-header: 0 8px 16px rgba(57, 48, 19, 0.12);

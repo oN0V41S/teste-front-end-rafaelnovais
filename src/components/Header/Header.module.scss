@@ -1,0 +1,164 @@
+@use 'variables' as *;
+
+.header {
+  background-color: $color-white;
+  color: $color-gray;
+  font-size: 12px;
+}
+
+.benefits {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 119px;
+  block-size: 32px;
+  padding: 0;
+  border-block-end: 1px solid $color-line;
+  list-style: none;
+  font-weight: $font-weight-medium;
+
+  strong {
+    color: $color-highlight;
+    font-weight: $font-weight-semibold;
+  }
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+}
+
+.benefit {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.main {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  max-inline-size: $container-width;
+  block-size: 72px;
+  margin-inline: auto;
+  padding-inline: 16px;
+
+  @media (max-width: 1024px) {
+    flex-wrap: wrap;
+    block-size: auto;
+    padding-block: 16px;
+  }
+}
+
+.logo {
+  flex: none;
+  display: block;
+  inline-size: 139px;
+}
+
+.search {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  max-inline-size: 630px;
+  block-size: 48px;
+  padding-inline: 24px 20px;
+  border-radius: 10px;
+  background-color: $color-search;
+
+  input {
+    flex: 1;
+    min-inline-size: 0;
+    border: 0;
+    background: none;
+    color: $color-text;
+    font: inherit;
+    font-size: 14px;
+    font-weight: $font-weight-medium;
+
+    &::placeholder {
+      color: $color-gray;
+      opacity: 1;
+    }
+
+    &:focus-visible {
+      outline: none;
+    }
+  }
+
+  &:focus-within {
+    outline: 2px solid $color-blue;
+  }
+
+  @media (max-width: 1024px) {
+    flex-basis: 100%;
+    max-inline-size: none;
+    order: 3;
+  }
+}
+
+.search button,
+.actions button {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid $color-blue;
+    outline-offset: 2px;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 32px;
+  margin-inline-start: auto;
+}
+
+.nav {
+  background-color: $color-white;
+  box-shadow: $shadow-header;
+
+  ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 91px;
+    block-size: 40px;
+    padding-inline: 16px;
+    list-style: none;
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    @media (max-width: 1280px) {
+      justify-content: flex-start;
+      gap: 32px;
+    }
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: inherit;
+    font-weight: $font-weight-semibold;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-blue;
+      outline-offset: 4px;
+    }
+  }
+}
+
+.highlight {
+  color: $color-highlight;
+}
