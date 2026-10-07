@@ -25,4 +25,4 @@ The test requires a CSS preprocessor (Sass, Less or Stylus), forbids UI librarie
 ## Consequences
 
 - Class names are hashed and scoped; tests should query by role/text, not by class.
-- Breakpoints/mixins are added only when first needed (see ADR-0007).
+- Mixins and breakpoints are added only when first needed.
