@@ -30,7 +30,7 @@ describe('ProductShowcase', () => {
   it('shows a status message while loading', () => {
     mockUseProducts({ isPending: true })
 
-    render(<ProductShowcase onSelect={vi.fn()} />)
+    render(<ProductShowcase label="Produtos" onSelect={vi.fn()} />)
 
     expect(screen.getByRole('status')).toHaveTextContent(/carregando/i)
   })
@@ -39,7 +39,7 @@ describe('ProductShowcase', () => {
     const refetch = vi.fn()
     mockUseProducts({ isError: true, refetch })
 
-    render(<ProductShowcase onSelect={vi.fn()} />)
+    render(<ProductShowcase label="Produtos" onSelect={vi.fn()} />)
     await userEvent.click(screen.getByRole('button', { name: /tentar novamente/i }))
 
     expect(screen.getByRole('alert')).toBeInTheDocument()
@@ -49,7 +49,7 @@ describe('ProductShowcase', () => {
   it('shows a message when there are no products', () => {
     mockUseProducts({ data: [] })
 
-    render(<ProductShowcase onSelect={vi.fn()} />)
+    render(<ProductShowcase label="Produtos" onSelect={vi.fn()} />)
 
     expect(screen.getByText(/nenhum produto/i)).toBeInTheDocument()
   })
@@ -57,7 +57,7 @@ describe('ProductShowcase', () => {
   it('renders one card per product in a list', () => {
     mockUseProducts({ data: products })
 
-    render(<ProductShowcase onSelect={vi.fn()} />)
+    render(<ProductShowcase label="Produtos" onSelect={vi.fn()} />)
 
     expect(screen.getAllByRole('listitem')).toHaveLength(2)
     expect(screen.getByRole('heading', { name: 'Iphone B' })).toBeInTheDocument()
@@ -67,7 +67,7 @@ describe('ProductShowcase', () => {
     const onSelect = vi.fn()
     mockUseProducts({ data: products })
 
-    render(<ProductShowcase onSelect={onSelect} />)
+    render(<ProductShowcase label="Produtos" onSelect={onSelect} />)
     await userEvent.click(screen.getByRole('button', { name: 'Comprar Iphone B' }))
 
     expect(onSelect).toHaveBeenCalledWith(products[1])

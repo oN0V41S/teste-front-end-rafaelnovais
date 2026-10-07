@@ -1,13 +1,16 @@
+import { Carousel } from '../Carousel'
 import { ProductCard } from '../ProductCard'
 import { useProducts } from '../../hooks/useProducts'
 import type { ShowcaseProduct } from '../../types/product'
 import styles from './ProductShowcase.module.scss'
 
 interface ProductShowcaseProps {
+  /** Accessible name of the showcase carousel. */
+  label: string
   onSelect: (product: ShowcaseProduct) => void
 }
 
-export function ProductShowcase({ onSelect }: ProductShowcaseProps) {
+export function ProductShowcase({ label, onSelect }: ProductShowcaseProps) {
   const { data: products, isPending, isError, refetch } = useProducts()
 
   if (isPending) {
@@ -34,12 +37,12 @@ export function ProductShowcase({ onSelect }: ProductShowcaseProps) {
   }
 
   return (
-    <ul className={styles.grid}>
+    <Carousel label={label}>
       {products.map((product) => (
         <li key={product.id}>
           <ProductCard product={product} onSelect={onSelect} />
         </li>
       ))}
-    </ul>
+    </Carousel>
   )
 }

@@ -1,0 +1,65 @@
+@use 'variables' as *;
+
+.carousel {
+  position: relative;
+  max-inline-size: 1364px;
+  margin-inline: auto;
+}
+
+.track {
+  display: flex;
+  gap: 18px;
+  max-inline-size: $container-width;
+  margin-inline: auto;
+  // Room for the card shadow, which the scroll container would otherwise clip.
+  padding: 20px 4px 30px;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  > li {
+    flex: 0 0 304px;
+    scroll-snap-align: start;
+  }
+}
+
+.arrow {
+  position: absolute;
+  inset-block-start: 50%;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  inline-size: 32px;
+  block-size: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: $color-white;
+  box-shadow: $shadow-card;
+  color: $color-text;
+  cursor: pointer;
+  transform: translateY(-50%);
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-blue;
+    outline-offset: 2px;
+  }
+}
+
+.prev {
+  inset-inline-start: 0;
+}
+
+.next {
+  inset-inline-end: 0;
+}
