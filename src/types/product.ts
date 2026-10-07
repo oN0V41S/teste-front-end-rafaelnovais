@@ -12,3 +12,13 @@ export interface ProductsResponse {
   success: boolean
   products: Product[]
 }
+
+/** Product as rendered by the showcases: API data plus mocked commercial fields. */
+export interface ShowcaseProduct extends Product {
+  id: string
+  /** Previous price, shown struck through. */
+  originalPrice?: number
+  /** Installment plan, e.g. "ou 2x de R$ 49,95 sem juros". */
+  installments?: { count: number; value: number }
+  freeShipping?: boolean
+}

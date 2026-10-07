@@ -1,0 +1,90 @@
+@use 'variables' as *;
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  inline-size: 100%;
+  max-inline-size: 304px;
+  min-block-size: 500px;
+  padding: 32px 15.76px 16px 12.39px;
+  background-color: $color-white;
+  border-radius: 10px;
+  box-shadow: $shadow-card;
+  color: $color-text;
+  cursor: pointer;
+}
+
+.photo {
+  inline-size: 100%;
+  block-size: 228px;
+  object-fit: contain;
+}
+
+.name {
+  margin-block-start: 9px;
+  font-size: 15px;
+  font-weight: $font-weight-light;
+}
+
+.prices {
+  margin-block-start: 12px;
+}
+
+.originalPrice {
+  display: block;
+  font-size: 16px;
+  font-weight: 400;
+  color: $color-text-strike;
+}
+
+.price {
+  margin-block-start: 2px;
+  font-size: 20px;
+  font-weight: $font-weight-bold;
+}
+
+.installments,
+.freeShipping {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.installments {
+  margin-block-start: 1px;
+}
+
+.freeShipping {
+  margin-block-start: 7px;
+  color: $color-blue;
+}
+
+.buy {
+  margin-block-start: auto;
+  block-size: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background-color: $color-blue;
+  color: $color-white;
+  font-size: 14px;
+  font-weight: $font-weight-bold;
+  text-transform: uppercase;
+
+  // Stretched link: the whole card triggers the button.
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+  }
+
+  &:focus-visible {
+    outline: none;
+
+    &::after {
+      outline: 3px solid $color-yellow;
+      outline-offset: 2px;
+    }
+  }
+}
