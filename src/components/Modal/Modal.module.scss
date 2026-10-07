@@ -1,0 +1,36 @@
+@use 'variables' as *;
+
+.dialog {
+  inline-size: 100%;
+  max-inline-size: min(769px, calc(100% - 32px));
+  margin: auto; // the global reset removes the browser's default centering
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background-color: $color-white;
+  color: $color-text;
+
+  &::backdrop {
+    background-color: $color-overlay;
+  }
+}
+
+.close {
+  position: absolute;
+  inset-block-start: 8px;
+  inset-inline-end: 20px;
+  display: grid;
+  place-items: center;
+  inline-size: 32px;
+  block-size: 32px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: $color-text;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid $color-blue;
+    outline-offset: 2px;
+  }
+}
