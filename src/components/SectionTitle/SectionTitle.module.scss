@@ -1,0 +1,27 @@
+@use 'variables' as *;
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  max-inline-size: $container-width;
+  margin-inline: auto;
+  color: $color-blue;
+  font-size: 30px;
+  font-weight: $font-weight-bold;
+  text-align: center;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    max-inline-size: 360px;
+    block-size: 1px;
+    background-color: $color-divider;
+  }
+
+  @media (max-width: 720px) {
+    gap: 16px;
+    font-size: 22px;
+  }
+}

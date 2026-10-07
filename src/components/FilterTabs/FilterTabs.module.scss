@@ -1,0 +1,44 @@
+@use 'variables' as *;
+
+.tabs {
+  display: flex;
+  max-inline-size: $container-width;
+  margin-inline: auto;
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.tab {
+  flex: 1 0 auto;
+  block-size: 40px;
+  padding: 12px 58px;
+  border: 1px solid $color-border;
+  margin-inline-end: -1px; // adjacent tabs share a single border
+  background-color: $color-white;
+  color: $color-text-tab;
+  font: inherit;
+  font-size: 16px;
+  font-weight: $font-weight-light;
+  line-height: 16px;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  &[aria-pressed='true'] {
+    color: $color-blue;
+    font-weight: $font-weight-bold;
+  }
+
+  &:focus-visible {
+    position: relative;
+    outline: 2px solid $color-blue;
+    outline-offset: -2px;
+  }
+
+  @media (max-width: 720px) {
+    padding-inline: 24px;
+  }
+}
