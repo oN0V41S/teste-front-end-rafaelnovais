@@ -2,8 +2,8 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import { fetchProducts, ProductsServiceError } from './productsService'
 
 const validProduct = {
-  productName: 'Iphone 11 PRO MAX BRANCO 1',
-  descriptionShort: 'Iphone 11 PRO MAX BRANCO 1',
+  productName: 'Product without extras',
+  descriptionShort: 'Product without extras',
   photo: 'https://example.com/foto.png',
   price: 15000,
 }
@@ -25,7 +25,34 @@ describe('fetchProducts', () => {
   it('returns the products of a valid response', async () => {
     mockFetch({ json: async () => ({ success: true, products: [validProduct] }) })
 
-    await expect(fetchProducts()).resolves.toEqual([validProduct])
+    await expect(fetchProducts()).resolves.toEqual([{ ...validProduct, id: '0' }])
+  })
+
+  it('derives the id from the position in the list', async () => {
+    mockFetch({
+      json: async () => ({
+        success: true,
+        products: [validProduct, { ...validProduct, productName: 'Other' }],
+      }),
+    })
+
+    const products = await fetchProducts()
+
+    expect(products.map((product) => product.id)).toEqual(['0', '1'])
+  })
+
+  it('merges the mocked extras only into products that have them', async () => {
+    mockFetch({
+      json: async () => ({
+        success: true,
+        products: [{ ...validProduct, productName: 'IPHONE 13 MINI 1' }, validProduct],
+      }),
+    })
+
+    const [withExtras, withoutExtras] = await fetchProducts()
+
+    expect(withExtras).toMatchObject({ originalPrice: 10500, freeShipping: true })
+    expect(withoutExtras).not.toHaveProperty('originalPrice')
   })
 
   it('forwards the abort signal to fetch', async () => {

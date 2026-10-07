@@ -10,6 +10,7 @@ vi.mock('../services/productsService', async (importOriginal) => ({
 }))
 
 const product = {
+  id: '0',
   productName: 'Iphone 11 PRO MAX BRANCO 1',
   descriptionShort: 'Iphone 11 PRO MAX BRANCO 1',
   photo: 'https://example.com/foto.png',

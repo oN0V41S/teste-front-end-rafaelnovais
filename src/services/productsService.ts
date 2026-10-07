@@ -1,4 +1,5 @@
-import type { Product, ProductsResponse } from '../types/product'
+import { productExtras } from '../mocks/productExtras'
+import type { Product, ProductsResponse, ShowcaseProduct } from '../types/product'
 
 const DEFAULT_PRODUCTS_API_URL =
   'https://app.econverse.com.br/teste-front-end/junior/tecnologia/lista-produtos/produtos.json'
@@ -27,7 +28,7 @@ function isProductsResponse(value: unknown): value is ProductsResponse {
   return body.success === true && Array.isArray(body.products) && body.products.every(isProduct)
 }
 
-export async function fetchProducts(signal?: AbortSignal): Promise<Product[]> {
+export async function fetchProducts(signal?: AbortSignal): Promise<ShowcaseProduct[]> {
   const url = import.meta.env.VITE_PRODUCTS_API_URL || DEFAULT_PRODUCTS_API_URL
 
   let response: Response
@@ -53,5 +54,9 @@ export async function fetchProducts(signal?: AbortSignal): Promise<Product[]> {
     throw new ProductsServiceError('Products API returned an unexpected payload.')
   }
 
-  return body.products
+  return body.products.map((product, index) => ({
+    ...product,
+    id: String(index),
+    ...productExtras[product.productName],
+  }))
 }
