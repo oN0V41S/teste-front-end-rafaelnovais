@@ -1,0 +1,8 @@
+@use 'variables' as *;
+
+.showcase {
+  max-inline-size: $container-width;
+  margin-inline: auto;
+  margin-block: 48px;
+  padding-inline: 16px;
+}

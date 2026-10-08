@@ -1,0 +1,1 @@
+export { PartnerBanners } from './PartnerBanners'

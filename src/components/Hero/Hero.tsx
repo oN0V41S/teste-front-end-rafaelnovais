@@ -1,4 +1,5 @@
 import heroImage from '../../assets/images/hero.jpg'
+import { Button } from '../Button'
 import styles from './Hero.module.scss'
 
 export function Hero() {
@@ -17,9 +18,7 @@ export function Hero() {
         <p className={styles.offer}>
           <strong>50% Off</strong> nos produtos
         </p>
-        <button className={styles.button} type="button">
-          Ver produto
-        </button>
+        <Button className={styles.button}>Ver produto</Button>
       </div>
     </section>
   )

@@ -1,0 +1,77 @@
+@use 'variables' as *;
+
+.section {
+  max-inline-size: $container-width;
+  margin-inline: auto;
+  margin-block: 48px;
+  padding-inline: 16px;
+}
+
+.list {
+  display: grid;
+  gap: 13px;
+  list-style: none;
+
+  @media (min-width: 900px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  aspect-ratio: 634 / 350;
+  overflow: hidden;
+  border-radius: 24px;
+  background-color: $color-text;
+  color: $color-white;
+
+  // Darkens the photo so the text stays readable.
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, $color-overlay-hero 0%, transparent 70%);
+  }
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  padding: 24px;
+
+  @media (min-width: 600px) {
+    padding-inline-start: 48px;
+  }
+}
+
+.title {
+  font-size: 40px;
+  font-weight: $font-weight-bold;
+  line-height: 1.2;
+}
+
+.text {
+  max-inline-size: 260px;
+  margin-block: 8px 24px;
+  font-size: 16px;
+  font-weight: $font-weight-light;
+  line-height: 24px;
+}
+
+.button {
+  block-size: 47px;
+  padding: 7px 32px;
+  font-weight: $font-weight-bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
