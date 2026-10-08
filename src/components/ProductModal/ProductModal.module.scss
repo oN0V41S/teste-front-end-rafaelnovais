@@ -2,52 +2,71 @@
 
 .content {
   display: grid;
-  grid-template-columns: 390px 1fr;
+  grid-template-columns: 247px 328px;
   align-items: center;
-  min-block-size: 299px;
+  column-gap: 79px;
+  padding: 52px 60px 52px 55px;
 
   @media (max-width: 720px) {
     grid-template-columns: 1fr;
     justify-items: center;
-    padding: 48px 24px 32px;
+    row-gap: 24px;
+    padding: 56px 24px 32px;
   }
 }
 
 .photo {
-  inline-size: 140px;
+  inline-size: 247px;
   max-inline-size: 100%;
-  justify-self: center;
+  block-size: 192px;
+  object-fit: contain;
 }
 
 .details {
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  padding-block: 63px;
-  padding-inline-end: 51px;
-
-  @media (max-width: 720px) {
-    padding: 0;
-  }
+  gap: 12px;
+  inline-size: 100%;
 }
 
 .name {
   font-size: 20px;
-  font-weight: $font-weight-light;
+  font-weight: $font-weight-regular;
   letter-spacing: 1px;
-  line-height: 1;
+  line-height: 1.2;
   text-transform: uppercase;
+}
+
+.prices {
+  display: grid;
+  gap: 2px;
+}
+
+.originalPrice {
+  color: $color-text-strike;
+  font-size: 14px;
+  font-weight: $font-weight-regular;
+}
+
+.extra,
+.freeShipping {
+  font-size: 11px;
+  font-weight: $font-weight-regular;
+}
+
+.freeShipping {
+  color: $color-blue;
 }
 
 .price {
   font-size: 20px;
   font-weight: $font-weight-semibold;
   letter-spacing: 1px;
-  line-height: 1;
+  line-height: 1.2;
 }
 
 .description {
-  max-inline-size: 290px;
+  margin-block-start: 8px;
   color: $color-gray;
   font-size: 10px;
   font-weight: $font-weight-medium;
@@ -56,9 +75,75 @@
 }
 
 .more {
+  align-self: flex-start;
   color: $color-blue;
   font-size: 11px;
   font-weight: $font-weight-semibold;
   letter-spacing: 0.55px;
   line-height: 1;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: inherit;
+  text-align: start;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid $color-blue;
+    outline-offset: 2px;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  max-inline-size: 310px;
+  margin-block-start: 8px;
+}
+
+.quantity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  inline-size: 112px;
+  block-size: 36px;
+  border: 1px solid $color-divider;
+  border-radius: 5px;
+  color: $color-text;
+}
+
+.step {
+  display: grid;
+  place-items: center;
+  inline-size: 32px;
+  block-size: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+
+  &:disabled {
+    color: $color-gray;
+    cursor: default;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-blue;
+    outline-offset: -2px;
+  }
+}
+
+.value {
+  font-size: 14px;
+  font-weight: $font-weight-medium;
+}
+
+.buy {
+  flex: 1;
+  block-size: 36px;
+  font-size: 14px;
+  font-weight: $font-weight-bold;
 }
