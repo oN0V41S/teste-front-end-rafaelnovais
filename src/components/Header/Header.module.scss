@@ -34,7 +34,8 @@
 }
 
 .main {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 630px) 1fr;
   align-items: center;
   gap: 32px;
   max-inline-size: $container-width;
@@ -43,6 +44,7 @@
   padding-inline: 16px;
 
   @media (max-width: 1024px) {
+    display: flex;
     flex-wrap: wrap;
     block-size: auto;
     padding-block: 16px;
@@ -57,9 +59,7 @@
 
 .search {
   display: flex;
-  flex: 1;
   align-items: center;
-  max-inline-size: 630px;
   block-size: 48px;
   padding-inline: 24px 20px;
   border-radius: 10px;
@@ -91,7 +91,6 @@
 
   @media (max-width: 1024px) {
     flex-basis: 100%;
-    max-inline-size: none;
     order: 3;
   }
 }
@@ -114,6 +113,7 @@
 .actions {
   display: flex;
   gap: 32px;
+  justify-self: end;
   margin-inline-start: auto;
 }
 
@@ -124,17 +124,18 @@
   ul {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 91px;
+    justify-content: space-between;
+    gap: 32px;
+    max-inline-size: $container-width;
     block-size: 40px;
+    margin-inline: auto;
     padding-inline: 16px;
     list-style: none;
     overflow-x: auto;
     scrollbar-width: none;
 
-    @media (max-width: 1280px) {
+    @media (max-width: 1024px) {
       justify-content: flex-start;
-      gap: 32px;
     }
   }
 

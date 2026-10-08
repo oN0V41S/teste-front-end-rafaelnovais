@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, type CSSProperties } from 'react'
 import fashion from '../../assets/icons/categories/fashion.svg'
 import drinks from '../../assets/icons/categories/drinks.svg'
 import health from '../../assets/icons/categories/health.svg'
@@ -33,7 +33,11 @@ export function CategoryList() {
               onClick={() => setSelected(name)}
             >
               <span className={styles.card}>
-                <img src={icon} alt="" width="64" height="64" loading="lazy" />
+                <span
+                  className={styles.icon}
+                  style={{ '--icon': `url("${icon}")` } as CSSProperties}
+                  aria-hidden="true"
+                />
               </span>
               <span className={styles.label}>{name}</span>
             </button>

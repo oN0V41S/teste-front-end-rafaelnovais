@@ -8,7 +8,7 @@
 
 .list {
   display: flex;
-  gap: 40px;
+  gap: 32px;
   padding: 8px 16px 16px;
   overflow-x: auto;
   list-style: none;
@@ -40,6 +40,25 @@
 
   .item[aria-pressed='true'] & {
     background-color: $color-white;
+  }
+}
+
+// The SVG is only a mask, so the icon takes the current text color of the item.
+.icon {
+  inline-size: 64px;
+  block-size: 64px;
+  background-color: $color-black;
+  -webkit-mask-image: var(--icon);
+  mask-image: var(--icon);
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+
+  .item[aria-pressed='true'] & {
+    background-color: $color-highlight;
   }
 }
 

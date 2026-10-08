@@ -1,20 +1,23 @@
 @use 'variables' as *;
 
 .carousel {
+  --gutter: 16px;
+
   position: relative;
-  max-inline-size: 1364px;
+  max-inline-size: $container-width;
   margin-inline: auto;
 }
 
 .track {
   display: flex;
   gap: 18px;
-  max-inline-size: $container-width;
-  margin-inline: auto;
-  // Room for the card shadow, which the scroll container would otherwise clip.
-  padding: 20px 4px 30px;
+  // The scroll container clips overflow, so the gutter keeps the card shadows visible
+  // while the cards stay aligned with the rest of the section.
+  margin-inline: calc(var(--gutter) * -1);
+  padding: 28px var(--gutter) 36px;
   list-style: none;
   overflow-x: auto;
+  scroll-padding-inline: var(--gutter);
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
 
@@ -57,9 +60,25 @@
 }
 
 .prev {
-  inset-inline-start: 0;
+  inset-inline-start: -8px;
 }
 
 .next {
-  inset-inline-end: 0;
+  inset-inline-end: -8px;
+}
+
+// On wide screens there is room for a larger bleed (full card shadows while scrolling)
+// and for the arrows outside the cards.
+@media (min-width: 1440px) {
+  .carousel {
+    --gutter: 32px;
+  }
+
+  .prev {
+    inset-inline-start: -56px;
+  }
+
+  .next {
+    inset-inline-end: -56px;
+  }
 }
