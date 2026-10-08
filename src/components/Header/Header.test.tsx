@@ -44,4 +44,13 @@ describe('Header', () => {
     expect(nav).toHaveTextContent('Ofertas do dia')
     expect(nav).toHaveTextContent('Assinatura')
   })
+
+  it('shows how many items are in the cart', () => {
+    const { rerender } = render(<Header />)
+    expect(screen.getByRole('button', { name: 'Carrinho' })).toBeInTheDocument()
+
+    rerender(<Header cartCount={3} />)
+
+    expect(screen.getByRole('button', { name: 'Carrinho, 3 itens' })).toHaveTextContent('3')
+  })
 })

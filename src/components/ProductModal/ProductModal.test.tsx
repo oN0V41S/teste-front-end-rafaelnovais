@@ -14,13 +14,13 @@ const product: ShowcaseProduct = {
 
 describe('ProductModal', () => {
   it('renders nothing while no product is selected', () => {
-    render(<ProductModal product={null} onClose={vi.fn()} />)
+    render(<ProductModal product={null} onClose={vi.fn()} onAddToCart={vi.fn()} />)
 
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
   })
 
   it('shows the selected product, named by its heading', () => {
-    render(<ProductModal product={product} onClose={vi.fn()} />)
+    render(<ProductModal product={product} onClose={vi.fn()} onAddToCart={vi.fn()} />)
 
     expect(screen.getByRole('dialog', { name: 'Iphone 13' })).toBeInTheDocument()
     expect(screen.getByRole('img', { name: 'Iphone 13' })).toHaveAttribute('src', product.photo)
@@ -31,7 +31,7 @@ describe('ProductModal', () => {
 
   it('calls onClose from the close button', async () => {
     const onClose = vi.fn()
-    render(<ProductModal product={product} onClose={onClose} />)
+    render(<ProductModal product={product} onClose={onClose} onAddToCart={vi.fn()} />)
 
     await userEvent.click(screen.getByRole('button', { name: 'Fechar' }))
 
@@ -39,7 +39,7 @@ describe('ProductModal', () => {
   })
 
   it('changes the quantity but never below one', async () => {
-    render(<ProductModal product={product} onClose={vi.fn()} />)
+    render(<ProductModal product={product} onClose={vi.fn()} onAddToCart={vi.fn()} />)
     const quantity = screen.getByLabelText('Quantidade selecionada')
 
     expect(screen.getByRole('button', { name: 'Diminuir quantidade' })).toBeDisabled()
@@ -59,6 +59,7 @@ describe('ProductModal', () => {
           freeShipping: true,
         }}
         onClose={vi.fn()}
+        onAddToCart={vi.fn()}
       />,
     )
 
@@ -69,10 +70,23 @@ describe('ProductModal', () => {
 
   it('closes from the "see more" button', async () => {
     const onClose = vi.fn()
-    render(<ProductModal product={product} onClose={onClose} />)
+    render(<ProductModal product={product} onClose={onClose} onAddToCart={vi.fn()} />)
 
     await userEvent.click(screen.getByRole('button', { name: /Veja mais detalhes/ }))
 
+    expect(onClose).toHaveBeenCalledOnce()
+  })
+
+  it('adds the chosen quantity to the cart and closes', async () => {
+    const onClose = vi.fn()
+    const onAddToCart = vi.fn()
+    render(<ProductModal product={product} onClose={onClose} onAddToCart={onAddToCart} />)
+
+    await userEvent.click(screen.getByRole('button', { name: 'Aumentar quantidade' }))
+    await userEvent.click(screen.getByRole('button', { name: 'Aumentar quantidade' }))
+    await userEvent.click(screen.getByRole('button', { name: 'COMPRAR' }))
+
+    expect(onAddToCart).toHaveBeenCalledWith(3)
     expect(onClose).toHaveBeenCalledOnce()
   })
 })

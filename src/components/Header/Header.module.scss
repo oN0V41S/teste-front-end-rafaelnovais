@@ -110,6 +110,25 @@
   }
 }
 
+.cart {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  inset-block-start: -6px;
+  inset-inline-end: -8px;
+  min-inline-size: 18px;
+  padding-inline: 4px;
+  border-radius: 9px;
+  background-color: $color-yellow;
+  color: $color-violet;
+  font-size: 11px;
+  font-weight: $font-weight-bold;
+  line-height: 18px;
+  text-align: center;
+}
+
 .actions {
   display: flex;
   gap: 32px;

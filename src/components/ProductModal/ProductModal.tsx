@@ -9,15 +9,22 @@ interface ProductModalProps {
   /** Selected product; `null` keeps the modal closed. */
   product: ShowcaseProduct | null
   onClose: () => void
+  /** Called with the chosen quantity when the user buys; the modal closes afterwards. */
+  onAddToCart: (quantity: number) => void
 }
 
-export function ProductModal({ product, onClose }: ProductModalProps) {
+export function ProductModal({ product, onClose, onAddToCart }: ProductModalProps) {
   const titleId = useId()
   const [quantity, setQuantity] = useState(1)
 
   function handleClose() {
     setQuantity(1)
     onClose()
+  }
+
+  function handleBuy() {
+    onAddToCart(quantity)
+    handleClose()
   }
 
   return (
@@ -69,7 +76,9 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
                   +
                 </button>
               </div>
-              <Button className={styles.buy}>COMPRAR</Button>
+              <Button className={styles.buy} onClick={handleBuy}>
+                COMPRAR
+              </Button>
             </div>
           </div>
         </div>

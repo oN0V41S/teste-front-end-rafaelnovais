@@ -21,7 +21,6 @@ const actions = [
   { icon: storeIcon, label: 'Meus pedidos' },
   { icon: heartIcon, label: 'Favoritos' },
   { icon: userIcon, label: 'Minha conta' },
-  { icon: cartIcon, label: 'Carrinho' },
 ]
 
 const categories = ['Todas categorias', 'Supermercado', 'Livros', 'Moda', 'Lançamentos']
@@ -30,7 +29,14 @@ function handleSearch(event: FormEvent) {
   event.preventDefault()
 }
 
-export function Header() {
+interface HeaderProps {
+  /** Number of items in the cart, shown as a badge on the cart button. */
+  cartCount?: number
+}
+
+export function Header({ cartCount = 0 }: HeaderProps) {
+  const cartLabel = cartCount > 0 ? `Carrinho, ${cartCount} itens` : 'Carrinho'
+
   return (
     <header className={styles.header}>
       <ul className={styles.benefits}>
@@ -69,6 +75,10 @@ export function Header() {
               <img src={icon} alt="" width="32" height="32" />
             </button>
           ))}
+          <button type="button" className={styles.cart} aria-label={cartLabel}>
+            <img src={cartIcon} alt="" width="32" height="32" />
+            {cartCount > 0 && <span className={styles.badge}>{cartCount}</span>}
+          </button>
         </div>
       </div>
 

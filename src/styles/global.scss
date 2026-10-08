@@ -1,6 +1,11 @@
 @use 'reset';
 @use 'variables' as *;
 
+// Keeps the layout from shifting sideways when the modal hides the scrollbar (scroll lock).
+html {
+  scrollbar-gutter: stable;
+}
+
 body {
   font-family: $font-family;
   font-weight: $font-weight-light;

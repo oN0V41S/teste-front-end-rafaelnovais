@@ -16,11 +16,12 @@ const filters = ['Celular', 'Acessórios', 'Tablets', 'Notebooks', 'TVs', 'Ver t
 
 export default function App() {
   const [filter, setFilter] = useState(filters[0])
+  const [cartCount, setCartCount] = useState(0)
   const [selectedProduct, setSelectedProduct] = useState<ShowcaseProduct | null>(null)
 
   return (
     <>
-      <Header />
+      <Header cartCount={cartCount} />
       <main>
         <Hero />
         <CategoryList />
@@ -59,7 +60,11 @@ export default function App() {
         <Newsletter />
       </main>
       <Footer />
-      <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
+      <ProductModal
+        product={selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+        onAddToCart={(quantity) => setCartCount((count) => count + quantity)}
+      />
     </>
   )
 }
