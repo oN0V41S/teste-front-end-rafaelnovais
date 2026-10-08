@@ -1,0 +1,133 @@
+@use 'variables' as *;
+
+.footer {
+  background-color: $color-background;
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+  max-inline-size: $container-width;
+  margin-inline: auto;
+  padding: 48px 16px;
+}
+
+.brand {
+  display: grid;
+  gap: 24px;
+  inline-size: 354px;
+  max-inline-size: 100%;
+}
+
+.about {
+  margin: 0;
+  color: $color-text;
+  font-size: 14px;
+  font-weight: $font-weight-light;
+  line-height: 1.5;
+}
+
+.socials {
+  display: flex;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.social {
+  display: block;
+  color: $color-text;
+
+  &:focus-visible {
+    outline: 2px solid $color-blue;
+    outline-offset: 2px;
+  }
+}
+
+.nav {
+  position: relative;
+  display: grid;
+  grid-template-columns: 216px 245px auto;
+  gap: 32px 0;
+
+  @media (max-width: 720px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.title {
+  margin: 0 0 12px;
+  color: $color-text-muted;
+  font-size: 18px;
+  font-weight: $font-weight-bold;
+  line-height: 24px;
+}
+
+.links {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.link {
+  color: $color-text-muted;
+  font-size: 14px;
+  font-weight: $font-weight-light;
+  line-height: 24px;
+  text-decoration: none;
+
+  &:focus-visible {
+    outline: 2px solid $color-blue;
+    outline-offset: 2px;
+  }
+}
+
+.copyright {
+  margin: 0;
+  padding: 16px;
+  background-color: $color-white;
+  color: $color-text;
+  font-size: 12px;
+  font-weight: $font-weight-light;
+  line-height: 15px;
+  text-align: center;
+}
+
+// Vertical divider between the brand block and the link columns (desktop only).
+@media (min-width: 1100px) {
+  // The prototype anchors the brand to the left edge of the page, not to the 1280px container.
+  .content {
+    justify-content: flex-start;
+    gap: 0;
+    max-inline-size: none;
+    padding-inline: 78px 16px;
+  }
+
+  .brand {
+    inline-size: 436px;
+  }
+
+  .about {
+    max-inline-size: 354px;
+  }
+
+  .nav {
+    padding-inline-start: 87px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset-block-start: -16px;
+      inset-inline-start: 0;
+      inline-size: 1px;
+      block-size: 198px;
+      background-color: rgba(40, 40, 40, 0.18);
+    }
+  }
+}

@@ -3,6 +3,7 @@ import styles from './App.module.scss'
 import { BrandList } from './components/BrandList'
 import { CategoryList } from './components/CategoryList'
 import { FilterTabs } from './components/FilterTabs'
+import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { Newsletter } from './components/Newsletter'
@@ -57,6 +58,7 @@ export default function App() {
         </ProductSection>
         <Newsletter />
       </main>
+      <Footer />
       <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
     </>
   )
