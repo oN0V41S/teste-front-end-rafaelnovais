@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import styles from './App.module.scss'
+import { BrandList } from './components/BrandList'
 import { CategoryList } from './components/CategoryList'
 import { FilterTabs } from './components/FilterTabs'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { PartnerBanners } from './components/PartnerBanners'
 import { ProductModal } from './components/ProductModal'
-import { ProductShowcase } from './components/ProductShowcase'
-import { SectionTitle } from './components/SectionTitle'
+import { ProductSection } from './components/ProductSection'
 import type { ShowcaseProduct } from './types/product'
 
 const filters = ['Celular', 'Acessórios', 'Tablets', 'Notebooks', 'TVs', 'Ver todos']
@@ -22,17 +22,38 @@ export default function App() {
       <main>
         <Hero />
         <CategoryList />
-        <section className={styles.showcase} aria-labelledby="related-products">
-          <SectionTitle id="related-products">Produtos relacionados</SectionTitle>
+        <ProductSection
+          id="related-products"
+          title="Produtos relacionados"
+          onSelect={setSelectedProduct}
+        >
           <FilterTabs
             label="Filtrar produtos"
             options={filters}
             value={filter}
             onChange={setFilter}
           />
-          <ProductShowcase label="Produtos relacionados" onSelect={setSelectedProduct} />
-        </section>
+        </ProductSection>
         <PartnerBanners />
+        <ProductSection
+          id="related-products-2"
+          title="Produtos relacionados"
+          onSelect={setSelectedProduct}
+        >
+          <a className={styles.viewAll} href="#">
+            Ver todos
+          </a>
+        </ProductSection>
+        <BrandList />
+        <ProductSection
+          id="related-products-3"
+          title="Produtos relacionados"
+          onSelect={setSelectedProduct}
+        >
+          <a className={styles.viewAll} href="#">
+            Ver todos
+          </a>
+        </ProductSection>
       </main>
       <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
     </>

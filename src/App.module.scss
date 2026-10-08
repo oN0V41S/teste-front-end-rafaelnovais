@@ -1,8 +1,10 @@
 @use 'variables' as *;
 
-.showcase {
-  max-inline-size: $container-width;
-  margin-inline: auto;
-  margin-block: 48px;
-  padding-inline: 16px;
+.viewAll {
+  display: block;
+  margin-block: 8px 24px;
+  color: $color-text;
+  font-size: 12px;
+  font-weight: $font-weight-bold;
+  text-align: center;
 }
