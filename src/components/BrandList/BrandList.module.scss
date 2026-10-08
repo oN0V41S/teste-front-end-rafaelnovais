@@ -1,0 +1,47 @@
+@use 'variables' as *;
+
+.section {
+  max-inline-size: $container-width;
+  margin-inline: auto;
+  margin-block: 48px;
+  padding-inline: 16px;
+}
+
+.title {
+  margin: 0 0 32px;
+  color: $color-blue;
+  font-size: 30px;
+  font-weight: $font-weight-bold;
+  text-align: center;
+
+  @media (max-width: 720px) {
+    font-size: 22px;
+  }
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 42px;
+  padding: 0 0 24px;
+  list-style: none;
+}
+
+.item {
+  display: grid;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  place-items: center;
+  inline-size: 211px;
+  block-size: 211px;
+  border-radius: 50%;
+  background-color: $color-white;
+  box-shadow: $shadow-brand;
+
+  &:focus-visible {
+    outline: 2px solid $color-blue;
+    outline-offset: 4px;
+  }
+}
