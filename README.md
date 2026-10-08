@@ -1,31 +1,89 @@
 # Teste Econverse: Vaga Desenvolvedor Front-End
 
-### Vem ser #Econverse!
+Página de e-commerce em **React + TypeScript** fiel ao layout do Figma, com vitrine de produtos alimentada pelo JSON remoto e modal de produto.
 
-Segue abaixo as instruções para a execução do teste.
+**Online:** https://teste-front-end-rafaelnovais.vercel.app/
 
-## Instruções
-- Faça um fork desse projeto para a sua conta pessoal do GitHub.
-- Desenvolva a página conforme as **Especificações Técnicas** 
-- Crie um README com as instruções para compilar, testar e rodar o projeto.
-- O link do repositório deverá ser enviado para o e-mail gustavo.cipriano@econverse.com.br com o título **Teste Vaga FrontEnd**
+## Requisitos atendidos
 
-## Especificações Técnicas
-- Desenvolver a pagina em React e TypeScript conforme o [layout](https://www.figma.com/file/rWnzPeoxgynuNPsJjV0VmV/Teste-Front-End-Jr?node-id=0%3A1). Para conseguir pegar os elementos do Figma, basta copiar o layout para sua conta que terá acesso de edição.
-- Montar a [vitrine](https://app.econverse.com.br/teste-front-end/junior/tecnologia/layout/vitrine-produtos.png) de produtos consumindo as informações dos produtos em json atraves desse [Link](https://app.econverse.com.br/teste-front-end/junior/tecnologia/lista-produtos/produtos.json).
-- Desenvolver a interação ao clicar em um produto conforme layout. A interação consiste em abrir um modal com as principais informações do produto presente no arquivo [JSON](https://app.econverse.com.br/teste-front-end/junior/tecnologia/lista-produtos/produtos.json) conforme o produto que clicar.
-- Utilizar Pré-processador Sass, Less ou Stylus.
-- Respeitar o Layout pixel a pixel, tamanho das fontes, cores e botões.
-- Não Utilizar bibliotecas UI como Bootstrap, Foundation, ou afins.
+- React 19 + TypeScript (`strict`), Vite.
+- Sass com CSS Modules; **nenhuma biblioteca de UI/CSS**. Carrossel, modal, abas e demais componentes são escritos à mão.
+- Vitrine consumindo o [JSON de produtos](https://app.econverse.com.br/teste-front-end/junior/tecnologia/lista-produtos/produtos.json).
+- Modal com as informações do produto clicado (nome, descrição, foto, preço e extras), acessível por teclado.
+- Responsivo (mobile, tablet e desktop).
+- SEO e HTML semântico: `header`/`main`/`footer`/`nav`/`section`/`article`, `h1` único, `alt` nas imagens, `meta description`, Open Graph, `robots.txt`.
 
-## Pontos Extras
-- Utilizar Boas práticas de SEO
-- Uso de HTML semântico
+## Como rodar
 
-## O que avaliaremos em seu teste
-- Organização do projeto
-- Lógica do código
-- Componentização
-- Alcance dos objetivos propostos
+Requer Node 20.19+ (ou 22.12+) e npm.
 
-**Boa sorte! ;)**
+```bash
+npm install
+npm run dev
+```
+
+A aplicação abre em http://localhost:5173. Em desenvolvimento, as requisições a `/api` passam por um proxy do Vite, porque a API não envia cabeçalhos CORS (veja [ADR-0007](docs/adr/0007-dev-proxy-for-products-api-cors.md)).
+
+## Scripts
+
+| Comando | O que faz |
+|---|---|
+| `npm run dev` | Servidor de desenvolvimento com HMR |
+| `npm test` | Testes (Vitest + React Testing Library) |
+| `npm run test:watch` | Testes em modo watch |
+| `npm run lint` | Lint com oxlint |
+| `npm run format` / `format:check` | Prettier (escreve / apenas verifica) |
+| `npm run build` | Checagem de tipos e build de produção em `dist/` |
+| `npm run preview` | Serve o build localmente |
+
+## Variáveis de ambiente
+
+| Variável | Descrição |
+|---|---|
+| `VITE_PRODUCTS_API_URL` | URL do JSON de produtos |
+
+- `.env.example`: URL absoluta da API (referência).
+- `.env.development`: `/api/produtos.json`, atendido pelo proxy do Vite.
+- `.env.production`: `/api/produtos.json`, atendido pelo rewrite do Vercel.
+
+## Deploy
+
+O site é publicado no **Vercel** a cada push em `main` (preset Vite: `npm run build`, saída `dist`). Como a API não tem CORS e o proxy do Vite não existe no build, o `vercel.json` reescreve `/api/*` para o endpoint real. Em qualquer outro host estático, é preciso uma regra equivalente.
+
+## Arquitetura
+
+```
+UI (components) → hooks → services → API
+```
+
+```
+src/
+  assets/      imagens e ícones
+  components/  uma pasta por componente: .tsx, .module.scss, index.ts e testes
+  hooks/       useProducts (React Query)
+  mocks/       campos comerciais que o JSON não traz (preço riscado, parcelas, frete)
+  services/    único lugar com fetch; valida o shape e devolve dados tipados
+  styles/      tokens (variáveis), mixins, reset e estilos globais
+  types/       tipos de domínio
+  utils/       funções puras (formatPrice)
+```
+
+- Componentes só apresentam; não chamam `fetch`.
+- Tokens de design (cores, fontes, sombras) vivem em `src/styles/_variables.scss`.
+- O JSON traz apenas nome, descrição, foto e preço. Preço riscado, parcelamento e selo de frete grátis vêm de um mock local mesclado na camada de serviço ([ADR-0005](docs/adr/0005-mock-commercial-fields-missing-from-api.md)).
+
+## Decisões técnicas
+
+As decisões relevantes estão registradas em [`docs/adr`](docs/adr/README.md): Vite em vez de CRA, Sass + CSS Modules, React Query sobre uma camada de serviço, modal sobre o `<dialog>` nativo, dados mockados, estratégia de testes e proxy de desenvolvimento.
+
+## Testes
+
+Vitest + React Testing Library + jsdom cobrem `formatPrice`, o serviço de produtos (com `fetch` mockado), os componentes (card, carrossel, abas, modal, seções) e os fluxos de abrir e fechar o modal.
+
+```bash
+npm test
+```
+
+## Enunciado original
+
+O enunciado do teste está no [repositório da Econverse](https://github.com/EconverseAG/teste-front-end).
