@@ -115,27 +115,54 @@
   gap: 32px;
   justify-self: end;
   margin-inline-start: auto;
+
+  @media (max-width: 1024px) {
+    // When the icons wrap onto their own row, center them instead of hugging the right edge.
+    justify-self: center;
+    margin-inline: auto;
+  }
 }
 
 .nav {
+  // Same width as `.main`, so the category bar lines up with the logo and the actions above.
+  max-inline-size: $container-width;
+  margin-inline: auto;
   background-color: $color-white;
   box-shadow: $shadow-header;
+
+  @media (max-width: 1024px) {
+    // Keep the bar inside the same side gutters as the rows above; it scrolls inside them.
+    margin-inline: 16px;
+  }
 
   ul {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 32px;
-    max-inline-size: $container-width;
     block-size: 40px;
-    margin-inline: auto;
+    margin: 0;
     padding-inline: 16px;
     list-style: none;
     overflow-x: auto;
     scrollbar-width: none;
 
+    // Items keep their content width (otherwise they shrink and the label overflows its link).
+    li {
+      flex: none;
+    }
+
     @media (max-width: 1024px) {
       justify-content: flex-start;
+      padding-inline-end: 0;
+
+      // Some browsers drop the end padding/margin of a scrolling flex container, so the end
+      // space is a real (empty) flex item: the 32px gap before it, minus 16px, leaves 16px.
+      &::after {
+        content: '';
+        flex: none;
+        margin-inline-start: -16px;
+      }
     }
   }
 
