@@ -4,6 +4,12 @@ Página de e-commerce em **React + TypeScript** fiel ao layout do Figma, com vit
 
 **Online:** https://teste-front-end-rafaelnovais.vercel.app/
 
+## Capturas de tela
+
+| Desktop (1440px) | Modal do produto | Mobile (375px) |
+|---|---|---|
+| ![Página inicial no desktop](docs/screenshots/home-desktop.png) | ![Modal com os dados do produto](docs/screenshots/product-modal.png) | ![Página inicial no mobile](docs/screenshots/home-mobile.png) |
+
 ## Requisitos atendidos
 
 - React 19 + TypeScript (`strict`), Vite.
