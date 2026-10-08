@@ -59,4 +59,19 @@ describe('Carousel', () => {
     await userEvent.click(screen.getByRole('button', { name: 'Anterior' }))
     expect(track.scrollBy).toHaveBeenLastCalledWith({ left: -400, behavior: 'smooth' })
   })
+
+  it('hides the slides that are outside the current page', () => {
+    renderCarousel()
+    const track = screen.getByRole('list')
+    const [one, two] = screen.getAllByRole('listitem')
+    const rect = (left: number, right: number) => () => ({ left, right }) as DOMRect
+    track.getBoundingClientRect = rect(0, 400)
+    one.getBoundingClientRect = rect(0, 300)
+    two.getBoundingClientRect = rect(320, 620)
+
+    fireEvent.scroll(track)
+
+    expect(one).not.toHaveAttribute('data-offpage')
+    expect(two).toHaveAttribute('data-offpage')
+  })
 })

@@ -1,16 +1,41 @@
 @use 'variables' as *;
 
+$arrow-size: 32px;
+$arrow-space: 48px; // arrow + gap, reserved beside the slides
+
 .carousel {
   --gutter: 16px;
+  --gap: 18px;
+  --per-page: 1;
 
   position: relative;
   max-inline-size: $container-width;
   margin-inline: auto;
+  padding-inline: $arrow-space;
+
+  @media (min-width: 560px) {
+    --per-page: 2;
+  }
+
+  @media (min-width: 840px) {
+    --per-page: 3;
+  }
+
+  @media (min-width: 1100px) {
+    --per-page: 4;
+  }
+
+  // On wide screens the arrows fit outside the 1280px content, so the slides keep full width.
+  @media (min-width: 1440px) {
+    --gutter: 32px;
+
+    padding-inline: 0;
+  }
 }
 
 .track {
   display: flex;
-  gap: 18px;
+  gap: var(--gap);
   // The scroll container clips overflow, so the gutter keeps the card shadows visible
   // while the cards stay aligned with the rest of the section.
   margin-inline: calc(var(--gutter) * -1);
@@ -26,8 +51,24 @@
   }
 
   > li {
-    flex: 0 0 304px;
+    flex: 0 0 calc((100% - var(--gap) * (var(--per-page) - 1)) / var(--per-page));
     scroll-snap-align: start;
+    transition:
+      opacity 0.35s,
+      filter 0.35s,
+      visibility 0s;
+
+    // Slides outside the current page (see Carousel.tsx): only the page is visible, and the
+    // blur shows briefly while the slides change.
+    &[data-offpage] {
+      opacity: 0;
+      filter: blur(2px);
+      visibility: hidden;
+      transition:
+        opacity 0.35s,
+        filter 0.35s,
+        visibility 0s 0.35s;
+    }
   }
 }
 
@@ -37,8 +78,8 @@
   z-index: 1;
   display: grid;
   place-items: center;
-  inline-size: 32px;
-  block-size: 32px;
+  inline-size: $arrow-size;
+  block-size: $arrow-size;
   padding: 0;
   border: 0;
   border-radius: 50%;
@@ -60,25 +101,17 @@
 }
 
 .prev {
-  inset-inline-start: -8px;
+  inset-inline-start: 0;
+
+  @media (min-width: 1440px) {
+    inset-inline-start: -$arrow-space;
+  }
 }
 
 .next {
-  inset-inline-end: -8px;
-}
+  inset-inline-end: 0;
 
-// On wide screens there is room for a larger bleed (full card shadows while scrolling)
-// and for the arrows outside the cards.
-@media (min-width: 1440px) {
-  .carousel {
-    --gutter: 32px;
-  }
-
-  .prev {
-    inset-inline-start: -56px;
-  }
-
-  .next {
-    inset-inline-end: -56px;
+  @media (min-width: 1440px) {
+    inset-inline-end: -$arrow-space;
   }
 }
