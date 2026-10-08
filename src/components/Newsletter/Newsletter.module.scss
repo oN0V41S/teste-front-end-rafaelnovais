@@ -1,0 +1,105 @@
+@use 'variables' as *;
+
+.section {
+  margin-block-start: 48px;
+  padding: 40px 16px;
+  background-color: $color-violet;
+  color: $color-white;
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px 32px;
+  max-inline-size: $container-width;
+  margin-inline: auto;
+}
+
+.text {
+  max-inline-size: 515px;
+}
+
+.title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: $font-weight-bold;
+  line-height: 1.4;
+
+  @media (max-width: 720px) {
+    font-size: 22px;
+  }
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 16px;
+  font-weight: $font-weight-light;
+  line-height: 1.3;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: 233px 233px 157px;
+  gap: 8px;
+  inline-size: 639px;
+  max-inline-size: 100%;
+
+  @media (max-width: 720px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.field {
+  box-sizing: border-box;
+  block-size: 42px;
+  padding: 0 24px;
+  border: 1px solid $color-border;
+  border-radius: 8px;
+  background-color: $color-white;
+  color: $color-text;
+  font-family: inherit;
+  font-size: 14px;
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-yellow;
+    outline-offset: 2px;
+  }
+}
+
+.submit {
+  block-size: 42px;
+  font-size: 14px;
+  font-weight: $font-weight-bold;
+
+  &:focus-visible {
+    outline: 2px solid $color-white;
+    outline-offset: 2px;
+  }
+}
+
+.terms {
+  display: flex;
+  grid-column: 1 / -1;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: $font-weight-light;
+
+  input {
+    inline-size: 16px;
+    block-size: 16px;
+    margin: 0;
+  }
+}
+
+.success {
+  margin: 0;
+  font-size: 18px;
+  font-weight: $font-weight-medium;
+}

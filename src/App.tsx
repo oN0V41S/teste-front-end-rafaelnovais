@@ -5,6 +5,7 @@ import { CategoryList } from './components/CategoryList'
 import { FilterTabs } from './components/FilterTabs'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
+import { Newsletter } from './components/Newsletter'
 import { PartnerBanners } from './components/PartnerBanners'
 import { ProductModal } from './components/ProductModal'
 import { ProductSection } from './components/ProductSection'
@@ -54,6 +55,7 @@ export default function App() {
             Ver todos
           </a>
         </ProductSection>
+        <Newsletter />
       </main>
       <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
     </>
