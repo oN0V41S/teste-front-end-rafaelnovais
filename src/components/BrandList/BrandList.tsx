@@ -11,10 +11,16 @@ export function BrandList() {
         Navegue por marcas
       </h2>
       <ul className={styles.list}>
-        {brands.map((brand) => (
+        {brands.map((brand, index) => (
           <li key={brand}>
             <button className={styles.item} type="button">
-              <img src={logo} alt="Econverse" width="117" height="35" loading="lazy" />
+              <img
+                src={logo}
+                alt={`Econverse, marca ${index + 1}`}
+                width="117"
+                height="35"
+                loading="lazy"
+              />
             </button>
           </li>
         ))}

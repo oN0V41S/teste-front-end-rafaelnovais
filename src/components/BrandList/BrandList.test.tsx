@@ -8,7 +8,6 @@ describe('BrandList', () => {
 
     expect(screen.getByRole('heading', { name: 'Navegue por marcas' })).toBeInTheDocument()
     expect(screen.getAllByRole('listitem')).toHaveLength(5)
-    expect(screen.getAllByRole('button', { name: 'Econverse' })).toHaveLength(5)
-    expect(screen.getAllByAltText('Econverse')).toHaveLength(5)
+    expect(screen.getAllByRole('button', { name: /^Econverse, marca \d$/ })).toHaveLength(5)
   })
 })
