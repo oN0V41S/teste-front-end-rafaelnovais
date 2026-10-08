@@ -8,3 +8,4 @@
 | [0004](0004-native-dialog-modal.md) | Build the modal on the native `<dialog>` element | accepted |
 | [0005](0005-mock-commercial-fields-missing-from-api.md) | Mock the commercial fields missing from the products API | accepted |
 | [0006](0006-testing-strategy.md) | Testing strategy: Vitest + React Testing Library | accepted |
+| [0007](0007-dev-proxy-for-products-api-cors.md) | Proxy the products API in development because of missing CORS headers | accepted |
