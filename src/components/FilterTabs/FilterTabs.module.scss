@@ -13,9 +13,9 @@
 }
 
 .tab {
-  flex: 1 0 auto;
+  flex: 1 1 0;
   block-size: 40px;
-  padding: 12px 58px;
+  padding: 12px 16px;
   border: 1px solid $color-border;
   margin-inline-end: -1px; // adjacent tabs share a single border
   background-color: $color-white;
@@ -25,7 +25,12 @@
   font-weight: $font-weight-light;
   line-height: 16px;
   text-transform: uppercase;
+  white-space: nowrap;
   cursor: pointer;
+
+  &:last-child {
+    margin-inline-end: 0;
+  }
 
   &[aria-pressed='true'] {
     color: $color-blue;
